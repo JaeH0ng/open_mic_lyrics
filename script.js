@@ -57,19 +57,16 @@ function createSongSections() {
         section.innerHTML = `
             <div class="song-header">
                 <h2>🎶 ${song.title}</h2>
-                <div class="toggle-buttons">
-                    <button class="description-toggle" onclick="toggleDescription('${song.id}')">
-                        <i class="fas fa-info-circle"></i>
-                        <span>설명 보기</span>
-                    </button>
-                    <button class="lyrics-toggle" onclick="toggleLyrics('${song.id}')">
-                        <i class="fas fa-music"></i>
-                        <span>가사 보기</span>
-                    </button>
-                </div>
+                <button class="lyrics-toggle" onclick="toggleLyrics('${song.id}')">
+                    <i class="fas fa-music"></i>
+                    <span>가사 보기</span>
+                </button>
             </div>
-            <div class="description-container" id="description-${song.id}" style="display: none;">
-                <p class="song-description">${song.description}</p>
+            <div class="description-trigger" onclick="showDescription('${song.id}')">
+                <span class="description-dots">---</span>
+                <div class="description-content" id="description-${song.id}">
+                    ${song.description}
+                </div>
             </div>
             <div class="lyrics-container" id="lyrics-${song.id}" style="display: none;">
                 <pre class="lyrics">${song.lyrics}</pre>
@@ -80,41 +77,38 @@ function createSongSections() {
     });
 }
 
-// 설명 토글 함수
-function toggleDescription(songId) {
-    const descriptionContainer = document.getElementById(`description-${songId}`);
-    const toggleButton = document.querySelector(`#${songId} .description-toggle`);
-    const toggleIcon = toggleButton.querySelector('i');
-    const toggleText = toggleButton.querySelector('span');
+// 설명 타이핑 애니메이션 함수
+function showDescription(songId) {
+    const trigger = document.querySelector(`#${songId} .description-trigger`);
+    const dots = trigger.querySelector('.description-dots');
+    const content = trigger.querySelector('.description-content');
     
-    if (descriptionContainer.style.display === 'none' || descriptionContainer.style.display === '') {
-        // 설명 보이기
-        descriptionContainer.style.display = 'block';
-        toggleIcon.className = 'fas fa-info-circle';
-        toggleText.textContent = '설명 숨기기';
-        
-        // 부드러운 애니메이션 효과
-        descriptionContainer.style.opacity = '0';
-        descriptionContainer.style.transform = 'translateY(-10px)';
-        
-        setTimeout(() => {
-            descriptionContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-            descriptionContainer.style.opacity = '1';
-            descriptionContainer.style.transform = 'translateY(0)';
-        }, 10);
-        
-    } else {
-        // 설명 숨기기
-        descriptionContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-        descriptionContainer.style.opacity = '0';
-        descriptionContainer.style.transform = 'translateY(-10px)';
-        
-        setTimeout(() => {
-            descriptionContainer.style.display = 'none';
-            toggleIcon.className = 'fas fa-info-circle';
-            toggleText.textContent = '설명 보기';
-        }, 300);
+    // 이미 표시된 경우 다시 숨기기
+    if (content.style.display === 'block') {
+        content.style.display = 'none';
+        dots.style.display = 'inline';
+        dots.textContent = '---';
+        return;
     }
+    
+    // 점들 숨기기
+    dots.style.display = 'none';
+    content.style.display = 'block';
+    content.innerHTML = '';
+    
+    const text = lyricsData.songs.find(song => song.id === songId).description;
+    let index = 0;
+    
+    // 타이핑 애니메이션
+    function typeWriter() {
+        if (index < text.length) {
+            content.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, 30); // 타이핑 속도 조절
+        }
+    }
+    
+    typeWriter();
 }
 
 // 가사 토글 함수

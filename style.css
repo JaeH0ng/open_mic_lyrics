@@ -204,82 +204,76 @@ section:hover {
   margin: 0;
 }
 
-/* 토글 버튼 컨테이너 */
-.toggle-buttons {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-/* 설명 토글 버튼 */
-.description-toggle {
-  background: #4a5568;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(74, 85, 104, 0.3);
-}
-
-.description-toggle:hover {
-  background: #2d3748;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(74, 85, 104, 0.4);
-}
-
 /* 가사 토글 버튼 */
 .lyrics-toggle {
   background: #6a0d25;
   color: #fff;
   border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 20px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(106, 13, 37, 0.3);
+  box-shadow: 0 2px 8px rgba(106, 13, 37, 0.3);
 }
 
 .lyrics-toggle:hover {
   background: #8e1c3a;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(106, 13, 37, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 13, 37, 0.4);
 }
 
-.lyrics-toggle i, .description-toggle i {
+.lyrics-toggle i {
   font-size: 0.8rem;
   transition: transform 0.3s ease;
 }
 
-.lyrics-toggle:hover i, .description-toggle:hover i {
-  transform: scale(1.1);
+.lyrics-toggle:hover i {
+  transform: scale(1.2);
 }
 
-/* 설명 컨테이너 */
-.description-container {
-  padding: 1.5rem 2rem;
+/* 설명 트리거 영역 */
+.description-trigger {
+  padding: 1rem 2rem;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-bottom: 1px solid #dee2e6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
 }
 
-/* 곡 설명 */
-.song-description {
+.description-trigger:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+}
+
+/* 점들 스타일 */
+.description-dots {
+  font-size: 1.2rem;
+  color: #6c757d;
+  letter-spacing: 0.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* 설명 내용 */
+.description-content {
+  display: none;
   font-size: 1rem;
   color: #4a5568;
   line-height: 1.7;
-  margin: 0;
   font-style: italic;
+  border-left: 3px solid #6a0d25;
+  padding-left: 1rem;
 }
 
 /* 가사 컨테이너 */
@@ -400,17 +394,19 @@ footer a:hover {
     font-size: 1.4rem;
   }
 
-  .lyrics-toggle, .description-toggle {
+  .lyrics-toggle {
     align-self: stretch;
     justify-content: center;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.8rem;
   }
 
-  .toggle-buttons {
-    flex-direction: column;
-    gap: 0.3rem;
-    min-width: 120px;
+  .description-trigger {
+    padding: 0.8rem 1.5rem;
+    min-height: 50px;
+  }
+
+  .description-content {
+    font-size: 0.9rem;
+    padding-left: 0.8rem;
   }
 
   .song-description {
@@ -463,9 +459,18 @@ footer a:hover {
     font-size: 0.8rem;
   }
 
-  .song-description {
-    padding: 1rem;
-    font-size: 0.9rem;
+  .description-trigger {
+    padding: 0.8rem 1rem;
+    min-height: 45px;
+  }
+
+  .description-content {
+    font-size: 0.85rem;
+    padding-left: 0.6rem;
+  }
+
+  .description-dots {
+    font-size: 1rem;
   }
 
   .lyrics-container {
