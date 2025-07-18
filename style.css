@@ -246,22 +246,38 @@ section:hover {
   min-height: 60px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .description-trigger:hover {
   background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
 }
 
+.description-trigger:hover::after {
+  content: "💭 이 곡에 대한 이야기...";
+  position: absolute;
+  right: 2rem;
+  font-size: 0.8rem;
+  color: #6a0d25;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
 /* 점들 스타일 */
 .description-dots {
-  font-size: 1.2rem;
-  color: #6c757d;
-  letter-spacing: 0.5rem;
+  font-size: 1rem;
+  color: #6a0d25;
+  font-weight: 500;
   animation: pulse 2s infinite;
 }
 
+.description-dots::before {
+  content: "💭 ";
+  margin-right: 0.5rem;
+}
+
 @keyframes pulse {
-  0%, 100% { opacity: 0.6; }
+  0%, 100% { opacity: 0.7; }
   50% { opacity: 1; }
 }
 
@@ -404,6 +420,12 @@ footer a:hover {
     min-height: 50px;
   }
 
+  .description-trigger::after {
+    content: "👆 터치하세요" !important;
+    font-size: 0.7rem !important;
+    right: 1.5rem !important;
+  }
+
   .description-content {
     font-size: 0.9rem;
     padding-left: 0.8rem;
@@ -464,13 +486,19 @@ footer a:hover {
     min-height: 45px;
   }
 
+  .description-trigger::after {
+    content: "👆" !important;
+    font-size: 0.8rem !important;
+    right: 1rem !important;
+  }
+
   .description-content {
     font-size: 0.85rem;
     padding-left: 0.6rem;
   }
 
   .description-dots {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .lyrics-container {

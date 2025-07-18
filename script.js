@@ -63,7 +63,7 @@ function createSongSections() {
                 </button>
             </div>
             <div class="description-trigger" onclick="showDescription('${song.id}')">
-                <span class="description-dots">---</span>
+                <span class="description-dots">이 곡에 대한 이야기...</span>
                 <div class="description-content" id="description-${song.id}">
                     ${song.description}
                 </div>
@@ -87,7 +87,7 @@ function showDescription(songId) {
     if (content.style.display === 'block') {
         content.style.display = 'none';
         dots.style.display = 'inline';
-        dots.textContent = '---';
+        dots.textContent = '이 곡에 대한 이야기...';
         return;
     }
     
