@@ -8,13 +8,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         const response = await fetch('lyrics-data.json');
         lyricsData = await response.json();
         
-        // 네비게이션 생성
-        createNavigation();
-        
         // 곡 섹션들 생성
         createSongSections();
         
-        // 스크롤 이벤트 리스너 추가
+        // 스크롤 이벤트 리스너 추가 (네비게이션 제거로 단순화)
         setupScrollNavigation();
         
     } catch (error) {
@@ -29,22 +26,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         `;
     }
 });
-
-// 네비게이션 생성 함수
-function createNavigation() {
-    const navList = document.getElementById('nav-list');
-    
-    lyricsData.songs.forEach((song, index) => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        
-        a.href = `#${song.id}`;
-        a.textContent = `${String(index + 1).padStart(2, '0')}. ${song.title}`;
-        
-        li.appendChild(a);
-        navList.appendChild(li);
-    });
-}
 
 // 곡 섹션들 생성 함수
 function createSongSections() {
@@ -63,7 +44,7 @@ function createSongSections() {
                 </button>
             </div>
             <div class="description-trigger" onclick="showDescription('${song.id}')">
-                <span class="description-dots">이 곡에 대한 이야기...</span>
+                <span class="description-dots"></span>
                 <div class="description-content" id="description-${song.id}">
                     ${song.description}
                 </div>
@@ -150,46 +131,8 @@ function toggleLyrics(songId) {
 
 // 스크롤 네비게이션 설정
 function setupScrollNavigation() {
-    // 네비게이션 링크에 부드러운 스크롤 효과 추가
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offsetTop = target.offsetTop - 100; // 헤더 높이 고려
-                
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // 현재 보고 있는 섹션 하이라이트
-    window.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav a');
-        
-        let currentSection = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 150;
-            const sectionHeight = section.clientHeight;
-            
-            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
-        });
-    });
+    // 네비게이션이 제거되었으므로 기본 스크롤 동작만 유지
+    console.log('네비게이션이 제거되었습니다.');
 }
 
 // 모든 가사 열기/닫기 함수 (추가 기능)
