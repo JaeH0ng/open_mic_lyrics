@@ -212,7 +212,7 @@ section:hover {
 }
 
 .description-dots::before {
-  content: "";
+  content: "이야기👆";
   margin-right: 0.5rem;
 }
 
@@ -409,7 +409,7 @@ footer a:hover {
   }
 
   .description-trigger::after {
-    content: "👆" !important;
+    content: "" !important;
     font-size: 0.8rem !important;
     right: 1rem !important;
   }
