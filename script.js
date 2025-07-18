@@ -31,9 +31,16 @@ document.addEventListener('DOMContentLoaded', async function() {
 function createSongSections() {
     const container = document.getElementById('songs-container');
     
+    // 순서를 한글로 변환하는 함수
+    const getKoreanOrder = (index) => {
+        const numbers = ['첫 번째', '두 번째', '세 번째', '네 번째', '다섯 번째', '여섯 번째', '일곱 번째', '여덟 번째'];
+        return numbers[index] || `${index + 1}번째`;
+    };
+    
     lyricsData.songs.forEach((song, index) => {
         const section = document.createElement('section');
         section.id = song.id;
+        const orderText = getKoreanOrder(index);
         
         section.innerHTML = `
             <div class="song-header">
@@ -44,7 +51,7 @@ function createSongSections() {
                 </button>
             </div>
             <div class="description-trigger" onclick="showDescription('${song.id}')">
-                <span class="description-dots"></span>
+                <span class="description-dots" data-order="${orderText}"></span>
                 <div class="description-content" id="description-${song.id}">
                     ${song.description}
                 </div>
@@ -68,7 +75,7 @@ function showDescription(songId) {
     if (content.style.display === 'block') {
         content.style.display = 'none';
         dots.style.display = 'inline';
-        dots.textContent = '이 곡에 대한 이야기...';
+        // 원래 텍스트는 CSS에서 data-order 속성으로 표시됨
         return;
     }
     
