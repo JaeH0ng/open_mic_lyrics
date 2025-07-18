@@ -230,6 +230,7 @@ section:hover {
   font-style: italic;
   border-left: 3px solid #6a0d25;
   padding-left: 1rem;
+  white-space: pre-wrap;
 }
 
 /* 가사 컨테이너 */
