@@ -212,7 +212,7 @@ section:hover {
 }
 
 .description-dots::before {
-  content: "👆 ";
+  content: "";
   margin-right: 0.5rem;
 }
 
