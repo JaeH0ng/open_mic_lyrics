@@ -204,50 +204,82 @@ section:hover {
   margin: 0;
 }
 
+/* 토글 버튼 컨테이너 */
+.toggle-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* 설명 토글 버튼 */
+.description-toggle {
+  background: #4a5568;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(74, 85, 104, 0.3);
+}
+
+.description-toggle:hover {
+  background: #2d3748;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(74, 85, 104, 0.4);
+}
+
 /* 가사 토글 버튼 */
 .lyrics-toggle {
   background: #6a0d25;
   color: #fff;
   border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 25px;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(106, 13, 37, 0.3);
+  box-shadow: 0 2px 6px rgba(106, 13, 37, 0.3);
 }
 
 .lyrics-toggle:hover {
   background: #8e1c3a;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(106, 13, 37, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(106, 13, 37, 0.4);
 }
 
-.lyrics-toggle i {
+.lyrics-toggle i, .description-toggle i {
   font-size: 0.8rem;
   transition: transform 0.3s ease;
 }
 
-.lyrics-toggle:hover i {
-  transform: scale(1.2);
+.lyrics-toggle:hover i, .description-toggle:hover i {
+  transform: scale(1.1);
+}
+
+/* 설명 컨테이너 */
+.description-container {
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 1px solid #dee2e6;
 }
 
 /* 곡 설명 */
 .song-description {
-  padding: 1.5rem 2rem;
   font-size: 1rem;
-  color: #555;
+  color: #4a5568;
   line-height: 1.7;
-  background: #fff;
-}
-
-.song-description strong {
-  color: #6a0d25;
-  font-weight: 600;
+  margin: 0;
+  font-style: italic;
 }
 
 /* 가사 컨테이너 */
@@ -368,9 +400,17 @@ footer a:hover {
     font-size: 1.4rem;
   }
 
-  .lyrics-toggle {
+  .lyrics-toggle, .description-toggle {
     align-self: stretch;
     justify-content: center;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .toggle-buttons {
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 120px;
   }
 
   .song-description {

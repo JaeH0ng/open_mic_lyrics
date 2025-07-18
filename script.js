@@ -57,19 +57,64 @@ function createSongSections() {
         section.innerHTML = `
             <div class="song-header">
                 <h2>🎶 ${song.title}</h2>
-                <button class="lyrics-toggle" onclick="toggleLyrics('${song.id}')">
-                    <i class="fas fa-chevron-down"></i>
-                    <span>가사 보기</span>
-                </button>
+                <div class="toggle-buttons">
+                    <button class="description-toggle" onclick="toggleDescription('${song.id}')">
+                        <i class="fas fa-info-circle"></i>
+                        <span>설명 보기</span>
+                    </button>
+                    <button class="lyrics-toggle" onclick="toggleLyrics('${song.id}')">
+                        <i class="fas fa-music"></i>
+                        <span>가사 보기</span>
+                    </button>
+                </div>
             </div>
-            <p class="song-description"><strong>설명 : </strong>${song.description}</p>
-            <div class="lyrics-container" id="lyrics-${song.id}">
+            <div class="description-container" id="description-${song.id}" style="display: none;">
+                <p class="song-description">${song.description}</p>
+            </div>
+            <div class="lyrics-container" id="lyrics-${song.id}" style="display: none;">
                 <pre class="lyrics">${song.lyrics}</pre>
             </div>
         `;
         
         container.appendChild(section);
     });
+}
+
+// 설명 토글 함수
+function toggleDescription(songId) {
+    const descriptionContainer = document.getElementById(`description-${songId}`);
+    const toggleButton = document.querySelector(`#${songId} .description-toggle`);
+    const toggleIcon = toggleButton.querySelector('i');
+    const toggleText = toggleButton.querySelector('span');
+    
+    if (descriptionContainer.style.display === 'none' || descriptionContainer.style.display === '') {
+        // 설명 보이기
+        descriptionContainer.style.display = 'block';
+        toggleIcon.className = 'fas fa-info-circle';
+        toggleText.textContent = '설명 숨기기';
+        
+        // 부드러운 애니메이션 효과
+        descriptionContainer.style.opacity = '0';
+        descriptionContainer.style.transform = 'translateY(-10px)';
+        
+        setTimeout(() => {
+            descriptionContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            descriptionContainer.style.opacity = '1';
+            descriptionContainer.style.transform = 'translateY(0)';
+        }, 10);
+        
+    } else {
+        // 설명 숨기기
+        descriptionContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        descriptionContainer.style.opacity = '0';
+        descriptionContainer.style.transform = 'translateY(-10px)';
+        
+        setTimeout(() => {
+            descriptionContainer.style.display = 'none';
+            toggleIcon.className = 'fas fa-info-circle';
+            toggleText.textContent = '설명 보기';
+        }, 300);
+    }
 }
 
 // 가사 토글 함수
@@ -82,7 +127,7 @@ function toggleLyrics(songId) {
     if (lyricsContainer.style.display === 'none' || lyricsContainer.style.display === '') {
         // 가사 보이기
         lyricsContainer.style.display = 'block';
-        toggleIcon.className = 'fas fa-chevron-up';
+        toggleIcon.className = 'fas fa-music';
         toggleText.textContent = '가사 숨기기';
         
         // 부드러운 애니메이션 효과
@@ -103,7 +148,7 @@ function toggleLyrics(songId) {
         
         setTimeout(() => {
             lyricsContainer.style.display = 'none';
-            toggleIcon.className = 'fas fa-chevron-down';
+            toggleIcon.className = 'fas fa-music';
             toggleText.textContent = '가사 보기';
         }, 300);
     }
