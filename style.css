@@ -139,14 +139,14 @@ section:hover {
 
 .song-header h2 {
   font-size: 1.6rem;
-  color: #031ee8;
+  color: #ad5a08;
   font-weight: 600;
   margin: 0;
 }
 
 /* 가사 토글 버튼 */
 .lyrics-toggle {
-  background: #ad5a08;
+  background: #031ee8;
   color: #fff;
   border: none;
   padding: 0.6rem 1.2rem;
@@ -198,7 +198,7 @@ section:hover {
   position: absolute;
   right: 2rem;
   font-size: 0.8rem;
-  color: #031ee8;
+  color: #ad5a08;
   font-weight: 500;
   opacity: 0.8;
 }
