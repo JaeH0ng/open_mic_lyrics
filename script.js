@@ -4,8 +4,9 @@ let lyricsData = null;
 
 // 페이지 로드 시 가사 데이터 불러오기
 // 페이지 준비 완료 시 초기 작업
-document.addEventListener('`DOMContentLoaded`', async function() {
+document.addEventListener('DOMContentLoaded', async function() {
     try {
+        // 가사 데이터 JSON 파일을 비동기로 불러옴
         const response = await fetch('lyrics-data.json');
         lyricsData = await response.json();
         
